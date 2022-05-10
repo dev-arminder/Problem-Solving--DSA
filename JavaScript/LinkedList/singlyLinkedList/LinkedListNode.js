@@ -12,8 +12,10 @@ class LinkedListNode {
    * @return {String}
    */
   toString(callback) {
-    return callback ? callback(this.value) : `${this.value}`;
+    return callback ? callback(this.node) : `${this.node}`;
   }
 }
 
-export default LinkedListNode;
+module.exports = {
+  LinkedListNode
+};
