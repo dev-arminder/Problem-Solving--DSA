@@ -69,6 +69,7 @@ class LinkedList {
         }
         currentNode = currentNode.next;
       }
+      this.size += 1;
     }
     return this;
   }
@@ -115,9 +116,79 @@ class LinkedList {
     this.tail = currentNode;
     let tailNode = currentNode.next;
     currentNode.next = null;
+    this.size -= 1;
     return tailNode;
+  }
+  /**
+   * @param {any} value - The value to search for.
+   * @returns {{node: any, index: number}}
+   */
 
-    currentNode.next;
+  findByValue(value) {
+    //  LinkedList is Empty
+    let index = 0;
+    let currentNode = this.head;
+    if (!this.head) {
+      return { node: null, index: null };
+    }
+    // Single Element is Present
+    if (this.head === this.tail) {
+      return this.head.node === value
+        ? { node: this.head.node, index: index }
+        : { node: null, index: null };
+    }
+    while (currentNode) {
+      if (currentNode.node === value)
+        return { node: currentNode.node, index: index };
+      currentNode = currentNode.next;
+      index += 1;
+    }
+
+    return { node: null, index: null };
+  }
+
+  /**
+   * @param {index} - Any Number
+   * @return {object} - {node: value, index: index, message: Message Depending upon context}
+   */
+  findByIndex(index) {
+    // index < 0
+    let idx = 0;
+    let message = null;
+    let currentNode = this.head;
+
+    if (index < 0) {
+      message = "Negative Index Not Supported Yet.";
+      return { node: null, index: null, message: message };
+    }
+    // index = 0
+
+    // index > linkedList size
+    if (index >= this.size) {
+      message = "Index Greater than size of Linked List.";
+      return { node: null, index: null, message: message };
+    }
+
+    while (currentNode) {
+      message = `Successfully Find ${currentNode.node} at index ${idx}`;
+      if (idx === index) {
+        return { node: currentNode.node, index: index, message: message };
+      }
+      idx += 1;
+      currentNode = currentNode.next;
+    }
+
+    message = "Unable to Find Any Node at Given Index";
+    return { node: null, index: null, message: message };
+  }
+
+  /**
+   * @param {any} - value
+   * @return {obj} - deleted Node
+   */
+  delete(value) {
+    // If LinkedList is empty
+    // If it contains One ELement
   }
 
   /**
@@ -150,3 +221,13 @@ ll.insertAt(0, 0);
 ll.insertAt(10, 20);
 ll.insertAt(2, 4);
 ll.print();
+
+// ll.deleteHead();
+// ll.deleteTail();
+
+// ll.print();
+// console.log(ll.findByValue(20));
+
+// console.log(ll.findByIndex(-2));
+// console.log(ll.findByIndex(110));
+// console.log(ll.findByIndex(3));
