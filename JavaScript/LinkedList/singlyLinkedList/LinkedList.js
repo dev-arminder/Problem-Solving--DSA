@@ -1,7 +1,7 @@
 const LinkedListNode = require("./LinkedListNode");
 class LinkedList {
   /**
-   * @params {LinkedListNode as Node}
+   * @params {LinkedListNode as Node For LinkedList}
    */
   constructor(Node = LinkedListNode) {
     /** @var LinkedListNode */
