@@ -187,14 +187,40 @@ class LinkedList {
    * @return {obj} - deleted Node
    */
   delete(value) {
-    // If LinkedList is empty
-    // If it contains One ELement
-  }
+    let currentNode = this.head;
+    if (!this.head) {
+      return null;
+    }
+    if (this.head === this.tail) {
+      if (this.head.node === value) {
+        this.head = null;
+        this.tail = null;
+        this.size -= 1;
+        return currentNode;
+      } else {
+        return null;
+      }
+    }
 
-  /**
-   * @param {empty}
-   * @return {empty}
-   */
+    if (this.head.node === value) {
+      let node = this.head;
+      this.head = this.head.next;
+      this.size -= 1;
+      return node;
+    }
+
+    while (currentNode.next) {
+      if (currentNode.next.node === value) {
+        let node = currentNode.next;
+        currentNode.next = currentNode.next.next;
+        this.size -= 1;
+        return node;
+      }
+      currentNode = currentNode.next;
+    }
+
+    return null;
+  }
   print() {
     let currentNode = this.head;
     while (currentNode) {
@@ -213,8 +239,8 @@ class LinkedList {
 }
 
 const ll = new LinkedList();
-ll.append(2);
-ll.append(3);
+// ll.append(2);
+// ll.append(3);
 
 console.log("******************");
 ll.insertAt(0, 0);
@@ -231,3 +257,6 @@ ll.print();
 // console.log(ll.findByIndex(-2));
 // console.log(ll.findByIndex(110));
 // console.log(ll.findByIndex(3));
+
+console.log(ll.delete(20));
+ll.print();
