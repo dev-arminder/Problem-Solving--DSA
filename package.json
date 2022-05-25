@@ -1,0 +1,23 @@
+{
+  "name": "problem-solving--dsa",
+  "version": "1.0.0",
+  "description": "Solving Data Structure and Algorithm Problems",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-arminder/Problem-Solving--DSA.git"
+  },
+  "author": "Arminder Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dev-arminder/Problem-Solving--DSA/issues"
+  },
+  "homepage": "https://github.com/dev-arminder/Problem-Solving--DSA#readme",
+  "devDependencies": {
+    "eslint": "^8.15.0"
+  }
+}

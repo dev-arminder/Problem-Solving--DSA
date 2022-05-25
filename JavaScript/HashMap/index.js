@@ -1,4 +1,5 @@
 const defaultHashTableSize = 32;
+const LinkedList = require("../LinkedList/singlyLinkedList/LinkedList");
 
 class HashTable {
   constructor(tableSize = defaultHashTableSize) {
