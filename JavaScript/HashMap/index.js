@@ -1,5 +1,5 @@
 const defaultHashTableSize = 32;
-const LinkedList = require("../LinkedList/singlyLinkedList/LinkedList");
+const { LinkedList } = require("../LinkedList/singlyLinkedList/LinkedList");
 
 class HashTable {
   /**
@@ -19,6 +19,9 @@ class HashTable {
    * @return - {number}
    */
   hash(key) {
+    if (typeof key === "number") {
+      return key % this.tableSize;
+    }
     const hash = Array.from(key).reduce(
       (hashAccumulator, keySymbol) => hashAccumulator + keySymbol.charCodeAt(0),
       0
@@ -29,13 +32,31 @@ class HashTable {
   }
 
   /**
-   * @param - {string key} - any
-   * @param - {Any value}
+   * @param - {any} 
+   * @return - {any}
    */
   set(key, value) {
     const keyHash = this.hash(key);
     this.keys[key] = keyHash;
     const bucketLinkedList = this.buckets[keyHash];
-    const node = bucketLinkedList.findByValue();
+    const node = bucketLinkedList.findByValue(value);
+    if (!node.node) {
+      bucketLinkedList.append({ key, value });
+    } else {
+      node.value.value = value;
+    }
+  }
+
+  /** 
+   * @param - {any}
+   * @return - {any}
+   */
+  get(key){
+    // let hashKey = this.hash(key);
+    // let bucketLinkedList = this.buckets[hashKey];
+    // return bucketLinkedList.findByValue()
   }
 }
+
+const map = new HashTable(7);
+console.log('============')
