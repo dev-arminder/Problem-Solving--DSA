@@ -18,28 +18,33 @@ var buddyStrings = function (s, goal) {
   }
 
   for (let i = 0; i < s.length; i++) {
-    sHashMap.set(i, s[i]);
-    goalHashMap.set(i, goal[i]);
+    sHashMap.set(s[i], i);
+    goalHashMap.set(goal[i], i);
+  }
+
+  if (s === goal && sHashMap.size < s.length) {
+    return true;
   }
 
   for (let i = 0; i < s.length; i++) {
-    if (sHashMap.get(i) !== goalHashMap.get(i)) {
+    if (s[i] !== goal[i]) {
       alterNativeIndex += 1;
       alterNativeIndexs.push(i);
     }
   }
 
-  if (alterNativeIndex !== 2) return false;
-
   if (
-    sHashMap.get(alterNativeIndexs[0]) ===
-      goalHashMap.get(alterNativeIndexs[1]) &&
-    sHashMap.get(alterNativeIndexs[1]) === goalHashMap.get(alterNativeIndexs[0])
+    alterNativeIndex === 2 &&
+    s[alterNativeIndexs[0]] === goal[alterNativeIndexs[1]] &&
+    s[alterNativeIndexs[1]] === goal[alterNativeIndexs[0]]
   ) {
     return true;
-  } else {
-    return false;
-  }
+  } else return false;
 };
 
 console.log(buddyStrings("abcd", "cbad"));
+console.log(buddyStrings("aa", "aa"));
+console.log(buddyStrings("aac", "aac"));
+console.log(buddyStrings("aac", "aax"));
+console.log(buddyStrings("abcacaba", "abbacaca"));
+console.log(buddyStrings("ab", "ca"));
