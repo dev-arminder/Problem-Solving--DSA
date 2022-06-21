@@ -9,33 +9,46 @@
  * @return {boolean}
  */
 var isLongPressedName = function (name, typed) {
-  let leftPointer = 0;
-  let rightPointer = 0;
+  let leftPointer = 1;
+  let rightPointer = 1;
 
-  for (rightPointer = 0; rightPointer < typed.length; rightPointer++) {
+  if (
+    name[0] !== typed[0] ||
+    name[name.length - 1] !== typed[typed.length - 1]
+  ) {
+    return false;
+  }
+
+  while (rightPointer < typed.length) {
     let leftChar = name[leftPointer];
     let rightChar = typed[rightPointer];
 
-    if (leftChar !== rightChar) {
+    if (leftChar === rightChar) {
+      if (leftPointer !== name.length - 1) {
+        leftPointer++;
+      }
+      rightPointer++;
+    } else if (
+      rightChar === name[leftPointer - 1] &&
+      typed[rightPointer - 1] !== leftChar
+    ) {
+      rightPointer++;
+    } else {
       return false;
     }
-
-    if (
-      rightPointer < typed.length - 1 &&
-      typed[rightPointer + 1] !== leftChar
-    ) {
-      leftPointer++;
-    }
-
-    if (leftPointer >= name.length) return false;
   }
 
-  return true;
+  if (leftPointer === name.length - 1) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
-// isLongPressedName("alex", "aaleex");
-// isLongPressedName("alex", "aaleexa");
-// isLongPressedName("saeed", "ssaaedd");
-// isLongPressedName("a", "a");
-// isLongPressedName("a", "b");
-isLongPressedName("leelee", "lleeelee");
+// console.log(isLongPressedName("alex", "aaleex"));
+// console.log(isLongPressedName("alex", "aaleexa"));
+// console.log(isLongPressedName("saeed", "ssaaedd"));
+// console.log(isLongPressedName("a", "a"));
+// console.log(isLongPressedName("a", "b"));
+// console.log(isLongPressedName("leelee", "lleeelee"));
+// console.log(isLongPressedName("alex", "aaleexeex"));
