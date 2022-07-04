@@ -238,29 +238,6 @@ class LinkedList {
   }
 }
 
-// const ll = new LinkedList();
-// // ll.append(2);
-// // ll.append(3);
-
-// console.log("******************");
-// ll.insertAt(0, 0);
-// ll.insertAt(10, 20);
-// ll.insertAt(2, 4);
-// ll.print();
-
-// // ll.deleteHead();
-// // ll.deleteTail();
-
-// // ll.print();
-// // console.log(ll.findByValue(20));
-
-// // console.log(ll.findByIndex(-2));
-// // console.log(ll.findByIndex(110));
-// // console.log(ll.findByIndex(3));
-
-// // console.log(ll.delete(20));
-// // ll.print();
-
 module.exports = {
-  LinkedList
+  LinkedList,
 };
