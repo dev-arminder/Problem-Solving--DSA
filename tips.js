@@ -12,3 +12,18 @@ while (i <= j && windowProduct >= k) {
 while (i <= j && windowProduct >= k) {
   windowProduct /= nums[i++];
 }
+/* 
+  2. Using multiple Variable and Conditions inside for loop
+*/
+
+function findBy({ index = Infinity, value }) {
+  for (
+    let current = this.first, position = 0;
+    current && position <= index;
+    position += 1, current = current.next
+  ) {
+    if (position === index || value === current.value) {
+      return { node: current, index: position };
+    }
+  }
+}
