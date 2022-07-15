@@ -1,3 +1,5 @@
+const Node = require("./DlinkedListNode");
+
 class DoublyLinkedList {
   constructor(listNode = Node) {
     this.Node = listNode;
@@ -9,7 +11,7 @@ class DoublyLinkedList {
   addFirst(value) {
     let newNode = new this.Node(value);
     this.size += 1;
-    if (!head) {
+    if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
       return newNode;
@@ -21,7 +23,7 @@ class DoublyLinkedList {
   }
 
   addLast(value) {
-    let newNode = new this.node(value);
+    let newNode = new this.Node(value);
     if (!this.tail) {
       this.head = newNode;
       this.tail = newNode;
@@ -43,12 +45,12 @@ class DoublyLinkedList {
       this.addLast(value);
     } else {
       let currentNode = this.head;
-      let position = 1;
+      let index = 1;
       while (index !== position - 1) {
         currentNode = currentNode.next;
         index++;
       }
-      let newNode = new this.node(value);
+      let newNode = new this.Node(value);
       newNode.next = currentNode.next;
       currentNode.next = newNode;
       newNode.next.previous = newNode;
@@ -74,14 +76,106 @@ class DoublyLinkedList {
   findBy({ value, index = Infinity }) {
     for (
       let position = 0, currentNode = this.head;
-      position <= index && current;
+      position <= index && currentNode;
       position++, currentNode = currentNode.next
     ) {
       if (position === index || currentNode.value === value) {
-        return { node: current, index: position };
+        return { node: currentNode.value, index: position };
       }
     }
+
+    return null;
+  }
+
+  print() {
+    let currentNode = this.head;
+    let str = ``;
+    while (currentNode) {
+      str += `${currentNode.value} ⇔ `;
+      currentNode = currentNode.next;
+    }
+
+    str += "null";
+    console.log(str);
+  }
+  removeFirst() {
+    if (this.head) {
+      let node = this.head;
+      if (this.head === this.tail) {
+        this.head = null;
+        this.tail = null;
+      } else {
+        let nextNode = this.head.next;
+        nextNode.previous = null;
+        this.head.next = null;
+        this.head = nextNode;
+      }
+      this.size -= 1;
+      return node;
+    }
+    return null;
+  }
+  removeLast() {
+    if (!this.tail) return null;
+    let node = this.tail;
+    if (!node.previous) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.tail = node.previous;
+      this.tail.next = null;
+      node.previous = null;
+    }
+    this.size -= 1;
+    return node;
+  }
+
+  removeByPosition(position = 0) {
+    if (position <= 0) {
+      return this.removeFirst();
+    } else if (position >= this.size - 1) {
+      return this.removeLast();
+    } else {
+      let pos = 0;
+      let current = this.head;
+      while (pos !== position) {
+        current = current.next;
+        pos++;
+      }
+      current.previous.next = current.next;
+      // if (current.next) {
+      current.next.previous = current.previous;
+      current.next = null;
+      // }
+      current.previous = null;
+      this.size -= 1;
+      return current;
+    }
+    return null;
+  }
+
+  removeByNode(value) {
+    if (!this.head) {
+      return null;
+    }
+    if (this.head.value === value) {
+      return this.removeFirst();
+    } else if (this.tail.value === value) {
+      return this.removeLast();
+    } else {
+      let current = this.head;
+      while (current && current.value !== value) {
+        current = current.next;
+      }
+      if (!current) return null;
+      current.next.previous = current.previous;
+      current.previous.next = current.next;
+      current.previous = null;
+      current.next = null;
+      this.size -= 1;
+      return current;
+    }
+
+    return null;
   }
 }
-
-let list = new DoublyLinkedList();
