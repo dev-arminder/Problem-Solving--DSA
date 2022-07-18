@@ -27,3 +27,6 @@ function findBy({ index = Infinity, value }) {
     }
   }
 }
+
+/* Untill a Number Don't Turned out to be zero */
+while (midPoint--) {}
