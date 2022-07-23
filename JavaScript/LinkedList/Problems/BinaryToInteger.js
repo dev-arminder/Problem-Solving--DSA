@@ -9,7 +9,6 @@ var getDecimalValue = function (head) {
     number += head.val;
     head = head.next;
   }
-
   let integerNumber = 0;
   let index = 0;
 
